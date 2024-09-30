@@ -1,0 +1,9 @@
+export const HOME = "/";
+export const LOGIN = "/login";
+export const SIGN_UP = "/signup"; //Indicates that users exists as you type username when signing up.
+export const PROFILE = "/:username";
+export const FORGOTPASSWORD = "/forgot-password";
+export const NOT_FOUND = "/404";
+export const EDIT_PROFILE = "/account/edit"; // add account type change here private or public and its logic 
+export const ABOUT = "/about";
+export const BLOCK = "/block";

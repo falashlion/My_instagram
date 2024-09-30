@@ -1,0 +1,130 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+
+type User 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  username: String!
+  email: String!
+  bio: String
+  avatar: String
+  firstname: String
+  surname: String
+  isPrivate: Boolean!
+  Gender: String! @default(value: "Prefare not to say")
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
+  followers: [Follower] @hasMany(indexName: "byFollower", fields: ["id"])
+  following: [Follower] @hasMany(indexName: "byFollowed", fields: ["id"])
+  messages: [Message] @hasMany(indexName: "bySender", fields: ["id"])
+  groups: [GroupMember] @hasMany(indexName: "byUser", fields: ["id"])
+  notifications: [Notification] @hasMany(indexName: "byUser", fields: ["id"])
+  comments: [Comment] @hasMany(indexName: "byUser", fields: ["id"])
+  likes: [Like] @hasMany(indexName: "byUser", fields: ["id"])
+  socials: [String]  
+}
+
+type Post 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  userID: ID! @index(name: "byUser")
+  content: String
+  mediaURL: String
+  mediaType: String
+  location: String
+  tags: [String]
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  user: User @belongsTo(fields: ["userID"])
+  comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
+  likes: [Like] @hasMany(indexName: "byPost", fields: ["id"])
+}
+
+type Comment 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  postID: ID! @index(name: "byPost")
+  userID: ID! @index(name: "byUser")
+  commentText: String
+  mediaURL: String
+  mediaType: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  post: Post @belongsTo(fields: ["postID"])
+  user: User @belongsTo(fields: ["userID"])
+}
+
+type Like 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  postID: ID! @index(name: "byPost")
+  userID: ID! @index(name: "byUser")
+  createdAt: AWSDateTime!
+  post: Post @belongsTo(fields: ["postID"])
+  user: User @belongsTo(fields: ["userID"])  # Corrected relationship here
+}
+
+type Follower 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  followerID: ID! @index(name: "byFollower")
+  followedID: ID! @index(name: "byFollowed")
+  createdAt: AWSDateTime!
+  follower: User @belongsTo(fields: ["followerID"])
+  followed: User @belongsTo(fields: ["followedID"])
+}
+
+type Message 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  senderID: ID! @index(name: "bySender")
+  receiverID: ID!
+  messageText: String
+  mediaURL: String
+  mediaType: String
+  createdAt: AWSDateTime!
+  sender: User @belongsTo(fields: ["senderID"])
+  receiver: User @belongsTo(fields: ["receiverID"])
+}
+
+type Group 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  groupName: String!
+  groupDescription: String
+  avatar: String
+  createdAt: AWSDateTime!
+  members: [GroupMember] @hasMany(indexName: "byGroup", fields: ["id"])
+}
+
+type GroupMember 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  groupID: ID! @index(name: "byGroup")
+  userID: ID! @index(name: "byUser")
+  joinedAt: AWSDateTime!
+  group: Group @belongsTo(fields: ["groupID"])
+  user: User @belongsTo(fields: ["userID"])
+}
+
+type Notification 
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID! @primaryKey
+  userID: ID! @index(name: "byUser")
+  notificationType: String
+  message: String
+  createdAt: AWSDateTime!
+  user: User @belongsTo(fields: ["userID"])
+}

@@ -1,0 +1,19 @@
+.new-conversation {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .new-conversation input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .new-conversation button {
+    padding: 10px 20px;
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  

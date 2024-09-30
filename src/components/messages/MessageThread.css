@@ -1,0 +1,23 @@
+.message-thread {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .message {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .sent {
+    text-align: right;
+  }
+  
+  .received {
+    text-align: left;
+  }
+  
