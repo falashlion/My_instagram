@@ -1,0 +1,88 @@
+/* Card Styles */
+.card {
+    width: 100%;
+    max-width: 28rem;
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-left: 260px;
+    margin-top: 1%;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+  }
+  
+  .card-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #3b82f6;
+    text-decoration: underline;
+  }
+  
+  .card-link:hover {
+    color: #2563eb;
+  }
+  
+  /* Customer List */
+  .list-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .customer-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .customer-item {
+    padding: 0.75rem 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .flex-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-pic {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+  }
+  
+  .customer-info {
+    margin-left: 1rem;
+    flex: 1;
+  }
+  
+  .customer-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1f2937;
+  }
+  
+  .customer-email {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .customer-amount {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+  }

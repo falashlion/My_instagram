@@ -3,20 +3,24 @@ import { Authenticator, useTheme, View, Image, Text, Heading, Button, useAuthent
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import './AmplifyStyles.css';
-import { SignInComponents } from '../src/pages/Auth/SignIn';
-import { SignUpComponents } from '../src/pages/Auth/SignUp';
 import { ForgotPasswordComponents } from '../src/pages/Auth/ForgotPassword';
 import HomePage from '../src/pages/HomePage/HomePage';
 import MessagesPage from './components/messages/MessagesPage'
 import ProfilePage from './components/profile/ProfilePage';
 import PostFlow from './components/post/PostFlow';
 import Layout from './layouts/Layout';
+import SearchBar from './components/search/SearchBar';
+import ExplorePost from './components/Explore/ExplorePost';
+import Notifications from './components/Notifications/Notifications';
+import EditProfile from './components/editProfile/EditProfile';
+import { Amplify } from 'aws-amplify';
+import outputs from './amplifyconfiguration.json';
+import '@aws-amplify/ui-react/styles.css';
+import UserProvider from './context/userContext';
 
-// const components = {
-//   SignIn: SignInComponents,
-//   SignUp: SignUpComponents,
-//   ForgotPassword: ForgotPasswordComponents,
-// };
+Amplify.configure(outputs);
+
+
 
 const components = {
   Header() {
@@ -190,39 +194,74 @@ const components = {
 const formFields = {
   signIn: {
     username: {
-      placeholder: 'Enter your email',
+      label: 'Username',
+      placeholder: 'Enter your username or email',
     },
   },
   signUp: {
+    email: {
+      label: 'Email:',
+      placeholder: 'Enter your Email',
+      isRequired: true,
+      order: 3,
+    },
+    picture: {
+      label: 'Profile Picture:',
+      placeholder: 'Upload your profile picture',
+      inputType: 'file',  
+      accept: 'image/*',  
+      isRequired: false,
+      order: 7,
+    },
+    name: {
+      label: 'Name:',
+      placeholder: 'Enter your full name',
+      isRequired: true,
+      order: 2,
+    },
+    preferred_username: {
+      label: 'Preferred Username:',
+      placeholder: 'Enter your preferred username',
+      isRequired: false,
+      order: 1,
+    },
+    gender: {
+      label: 'Gender:',
+      placeholder: 'Enter your gender',
+      isRequired: false,
+      order: 4,
+    },
     password: {
       label: 'Password:',
-      placeholder: 'Enter your Password:',
-      isRequired: false,
-      order: 2,
+      placeholder: 'Enter your password',
+      isRequired: true,
+      order: 5,
     },
     confirm_password: {
       label: 'Confirm Password:',
-      order: 1,
+      placeholder: 'Confirm your password',
+      isRequired: true,
+      order: 6,
     },
   },
   forceNewPassword: {
     password: {
-      placeholder: 'Enter your Password:',
+      placeholder: 'Enter your new password',
     },
   },
   forgotPassword: {
     username: {
-      placeholder: 'Enter your email:',
+      placeholder: 'Enter your username or email',
     },
   },
   confirmResetPassword: {
     confirmation_code: {
-      placeholder: 'Enter your Confirmation Code:',
-      label: 'New Label',
+      placeholder: 'Enter your confirmation code',
+      label: 'Confirmation Code',
       isRequired: false,
     },
     confirm_password: {
-      placeholder: 'Enter your Password Please:',
+      placeholder: 'Confirm your new password',
     },
   },
   setupTotp: {
@@ -231,43 +270,52 @@ const formFields = {
       totpUsername: 'amplify_qr_test_user',
     },
     confirmation_code: {
-      label: 'New Label',
-      placeholder: 'Enter your Confirmation Code:',
+      label: 'Confirmation Code',
+      placeholder: 'Enter your confirmation code',
       isRequired: false,
     },
   },
   confirmSignIn: {
     confirmation_code: {
-      label: 'New Label',
-      placeholder: 'Enter your Confirmation Code:',
+      label: 'Confirmation Code',
+      placeholder: 'Enter your confirmation code',
       isRequired: false,
     },
   },
 };
 
+
 export default function App() {
   return (
     <Router>
-      <Authenticator.Provider components={components}>
-        <Authenticator formFields={formFields} components={components}>
-          {({ signOut }) => (
+      <UserProvider>
+      
+        <Authenticator 
+        formFields={formFields} 
+        components={components}>
+          {({ signOut, user })=> (
             <div style={{ position: 'relative' }}>
+              {/* <Button onClick={signOut} style={{ position: 'absolute', top: 10, right: 10 }}>
+            Sign Out
+          </Button> */}
               {/* Main content */}
               <Routes>
                 <Route path="/" element={<Layout signOut={signOut} />}>
                   <Route index element={<HomePage />} />
-                  <Route path="/signin" element={<SignInComponents />} />
-                  <Route path="/signup" element={<SignUpComponents />} />
                   <Route path="/forgot-password" element={<ForgotPasswordComponents />} />
                   <Route path="/profile" element={<ProfilePage />} />
                   <Route path="/messages" element={<MessagesPage />} />
                   <Route path="/post/*" element={<PostFlow />} />
+                  <Route path="/search" element={<SearchBar />} />
+                  <Route path="/explore" element={<ExplorePost />} />
+                  <Route path="/notifications" element={<Notifications />} />
+                  <Route path="/settings" element={<EditProfile />} />
                 </Route>
               </Routes>
             </div>
           )}
         </Authenticator>
-      </Authenticator.Provider>
+        </UserProvider>
     </Router>
   );
 }

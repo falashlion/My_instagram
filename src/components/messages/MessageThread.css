@@ -21,3 +21,13 @@
     text-align: left;
   }
   
+
+  .message-input-wrapper {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-self: center;
+    padding: 10px 20px;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+  }

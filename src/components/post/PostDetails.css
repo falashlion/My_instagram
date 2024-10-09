@@ -82,9 +82,7 @@
 }
 
 .add-location,
-.add-collaborator,
-.accessibility-options,
-.advanced-settings {
+ .add-tags {
   background: none;
   border: none;
   text-align: left;
@@ -94,9 +92,7 @@
 }
 
 .add-location:hover,
-.add-collaborator:hover,
-.accessibility-options:hover,
-.advanced-settings:hover {
+.add-tags:hover{
   text-decoration: underline;
 }
 
@@ -137,4 +133,41 @@
     width: 100%;
     text-align: center;
   }
+}
+
+
+
+.location-input {
+  margin-top: 5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+
+.tags-dropdown {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 5px;
+  
+}
+
+.tag-item {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+}
+
+.tag-item:last-child {
+  border-bottom: none;
+}
+
+.tag-item:hover {
+  background-color: #f0f0f0;
 }

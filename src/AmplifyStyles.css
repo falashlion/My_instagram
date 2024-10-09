@@ -1,10 +1,10 @@
 /* AmplifyStyles.css */
 [data-amplify-authenticator] {
-    --amplify-components-authenticator-router-box-shadow: none;
+    --amplify-components-authenticator-router-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; ;
     --amplify-components-authenticator-router-border-width: 0px;
-    --amplify-components-authenticator-form-padding: 5px;
-    --amplify-components-button-primary-background-color: #0095f6; /* Instagram blue */
-    --amplify-components-button-primary-border-radius: 4px;
+    --amplify-components-authenticator-form-padding: 15px;
+    --amplify-components-button-primary-background-color: #0095f6; 
+    --amplify-components-button-primary-border-radius: 20px;
     --amplify-components-button-primary-color: #fff;
     --amplify-components-fieldcontrol-focus-box-shadow: none;
     --amplify-components-fieldcontrol-border-color: #dbdbdb;

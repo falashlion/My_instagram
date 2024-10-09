@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import logo from '../../assets/images/instagram-logo.png'
 import { Link } from 'react-router-dom'
 
-const NavBar = (signOut) => {
+const NavBar = ({signOut}) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMessageNumber, setIsMessageNumber] = useState(0);
   
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -22,14 +23,15 @@ const NavBar = (signOut) => {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
+
   return (
     <>
       <aside 
         id="logo-sidebar" 
-        className="fixed top-0 left-0 z-40 h-screen w-64 sm:w-16 transition-transform -translate-x-full sm:translate-x-0 sm:h-auto sm:flex sm:justify-center sm:flex-row sm:w-full   lg:h-screen lg:w-64 lg:flex-col" 
+        className="fixed top-0 left-0 z-40 h-screen w-64 sm:w-16 transition-transform -translate-x-full sm:translate-x-0 sm:h-auto sm:flex sm:justify-center sm:flex-row sm:w-full backdrop-blur-md border border-white border-opacity-30 rounded-lg  lg:h-screen lg:w-64 lg:flex-col" 
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 sm:py-0 sm:px-10  overflow-y-auto space-y-0 space-x-0 justify-left border-2 dark:bg-gray-800 xs:flex xs:flex-row xs:w-full sm:flex sm:flex-row xs:justify-between  sm:w-full  sm:justify-between lg:block">
+        <div className="h-full px-3 py-4 sm:py-0 sm:px-10  overflow-y-auto space-y-0 space-x-0 justify-left backdrop-blur-md border-1 border-white border-opacity-30 rounded-lg dark:bg-gray-800 xs:flex xs:flex-row xs:w-full sm:flex sm:flex-row xs:justify-between  sm:w-full  sm:justify-between lg:block">
           <Link to="/" className="flex items-center mb-5 sm:mb-0 sm:justify-center sm:w-100">
             <img 
               src={isDarkMode ? logo : "https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png"} 
@@ -38,7 +40,7 @@ const NavBar = (signOut) => {
             />
           </Link>
           
-          <ul className="space-y-2 space-x-8 pl-6 pb-6 pt-4 font-medium sm:flex sm:space-y-0 sm:space-x-2 sm:items-center sm:space-x-0 sm:space-y-0 lg:flex-col  lg:items-start ">
+          <ul className="space-y-2 space-x-8 pl-6 pb-6 pt-4 align-baseline font-medium sm:flex sm:space-y-0 sm:space-x-2 sm:items-center sm:space-x-0 sm:space-y-0 lg:flex-col  lg:items-start ">
             <li className='flex flex-col items-center '>
               <Link to="/"
                 className="space-y-0 space-x-4 flex items-center justify-center p-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -61,7 +63,7 @@ const NavBar = (signOut) => {
             </li>
             
             <li className='flex flex-col items-center '>
-              <Link 
+              <Link to="/search"
                 className="space-y-2 space-x-4 flex items-center justify-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -84,7 +86,8 @@ const NavBar = (signOut) => {
             </li>
 
             <li className='flex flex-col items-center '>
-              <Link className="space-y-0 space-x-3 flex items-center justify-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <Link to="/explore"
+              className="space-y-0 space-x-3 flex items-center justify-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg
                   className="w-7 h-7 transition duration-75 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
                   xmlns="http://www.w3.org/2000/svg"
@@ -118,16 +121,19 @@ const NavBar = (signOut) => {
                   <path d="M19.07 4.93a10 10 0 0 0-16.28 11 1.06 1.06 0 0 1 .09.64L2 20.8a1 1 0 0 0 .27.91A1 1 0 0 0 3 22h.2l4.28-.86a1.26 1.26 0 0 1 .64.09 10 10 0 0 0 11-16.28zm.83 8.36a8 8 0 0 1-11 6.08 3.26 3.26 0 0 0-1.25-.26 3.43 3.43 0 0 0-.56.05l-2.82.57.57-2.82a3.09 3.09 0 0 0-.21-1.81 8 8 0 0 1 6.08-11 8 8 0 0 1 9.19 9.19z" />
                 </svg>
                 <span className="ms-3 hidden lg:block">Messages</span>
-                <span className="absolute inset-0 object-right-top mr-6">
-                  <div className="inline-flex items-center px-1.5 py-0.5 border-1 border-white rounded-full text-xs font-semibold leading-3 bg-red-500 text-white">
-                    6
+                <span className=" inset-1 object-right-top mr-24">
+                {isMessageNumber != null && (
+                  <div className="inline-flex items-center px-1 py-0.5 border-1 border-white rounded-full text-xs font-semibold leading-3 bg-red-500 text-white">
+                    <span>{isMessageNumber > 0 ? isMessageNumber : ''}</span>
                   </div>
+                )}
                 </span>
               </Link>
             </li>
 
             <li className='flex flex-col items-center '>
-            <Link   className="space-y-0 space-x-4 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <Link  to="/notifications"
+             className="space-y-0 space-x-4 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <svg
                className="flex-shrink-0 w-6 h-6 text-black transition duration-75 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
                xmlns="http://www.w3.org/2000/svg"
@@ -176,12 +182,12 @@ const NavBar = (signOut) => {
          </li>
          <li className='flex flex-col items-center '>
               <Link to={"/profile"}
-                className="space-y-0 space-x-4 flex items-center justify-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="space-y-0 space-x-4 flex items-center justify-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <img
                   src={`https://via.placeholder.com/40?text=Sugg+${1  + 1}`}
                   alt="Suggestion"
-                  className="w-8 h-8 rounded-full object-full border-2 border-white"
+                  className="w-10 h-10 rounded-full object-full border-2 border-white"
                 />
                 <span className="ms-3 hidden lg:block">profile</span>
               </Link>
@@ -217,7 +223,7 @@ const NavBar = (signOut) => {
                   <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownTopButton">
                   <li className='flex flex-col items-center '>
                     <Link
-                      to="#"
+                      to="/settings"
                       className="flex items-center space-x-4 block px-2 py-2 hover:bg-gray-100  rounded-lg dark:hover:bg-gray-500 dark:hover:text-white"
                     >
                       <svg
@@ -245,8 +251,7 @@ const NavBar = (signOut) => {
                           className="w-5 h-5 text-black transition duration-75 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
-                          viewBox="0 0 18 16"
-                        >
+                          viewBox="0 0 18 16">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                         </svg>
                         <span className="ms-3 hidden lg:block">Sign Out</span>

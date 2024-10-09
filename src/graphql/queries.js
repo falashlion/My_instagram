@@ -9,8 +9,8 @@ export const getUser = /* GraphQL */ `
       email
       bio
       avatar
-      firstname
-      surname
+      name
+      Phone
       isPrivate
       Gender
       createdAt
@@ -48,6 +48,10 @@ export const getUser = /* GraphQL */ `
         __typename
       }
       socials
+      conversations {
+        nextToken
+        __typename
+      }
       owner
       __typename
     }
@@ -74,13 +78,329 @@ export const listUsers = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
         updatedAt
         socials
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getConversation = /* GraphQL */ `
+  query GetConversation($id: ID!) {
+    getConversation(id: $id) {
+      id
+      title
+      createdAt
+      updatedAt
+      participants {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const listConversations = /* GraphQL */ `
+  query ListConversations(
+    $id: ID
+    $filter: ModelConversationFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listConversations(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getConversationParticipant = /* GraphQL */ `
+  query GetConversationParticipant($id: ID!) {
+    getConversationParticipant(id: $id) {
+      id
+      conversationID
+      userID
+      joinedAt
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      user {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listConversationParticipants = /* GraphQL */ `
+  query ListConversationParticipants(
+    $id: ID
+    $filter: ModelConversationParticipantFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listConversationParticipants(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        conversationID
+        userID
+        joinedAt
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const conversationParticipantsByConversationID = /* GraphQL */ `
+  query ConversationParticipantsByConversationID(
+    $conversationID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelConversationParticipantFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    conversationParticipantsByConversationID(
+      conversationID: $conversationID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        conversationID
+        userID
+        joinedAt
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const conversationParticipantsByUserID = /* GraphQL */ `
+  query ConversationParticipantsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelConversationParticipantFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    conversationParticipantsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        conversationID
+        userID
+        joinedAt
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getMessage = /* GraphQL */ `
+  query GetMessage($id: ID!) {
+    getMessage(id: $id) {
+      id
+      senderID
+      conversationID
+      messageText
+      mediaURL
+      mediaType
+      createdAt
+      status
+      sender {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listMessages = /* GraphQL */ `
+  query ListMessages(
+    $id: ID
+    $filter: ModelMessageFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listMessages(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        senderID
+        conversationID
+        messageText
+        mediaURL
+        mediaType
+        createdAt
+        status
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const messagesBySenderID = /* GraphQL */ `
+  query MessagesBySenderID(
+    $senderID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    messagesBySenderID(
+      senderID: $senderID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        senderID
+        conversationID
+        messageText
+        mediaURL
+        mediaType
+        createdAt
+        status
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const messagesByConversationID = /* GraphQL */ `
+  query MessagesByConversationID(
+    $conversationID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    messagesByConversationID(
+      conversationID: $conversationID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        senderID
+        conversationID
+        messageText
+        mediaURL
+        mediaType
+        createdAt
+        status
+        updatedAt
         owner
         __typename
       }
@@ -107,8 +427,8 @@ export const getPost = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -226,8 +546,8 @@ export const getComment = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -363,8 +683,8 @@ export const getLike = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -479,8 +799,8 @@ export const getFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -495,8 +815,8 @@ export const getFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -598,118 +918,6 @@ export const followersByFollowedID = /* GraphQL */ `
     }
   }
 `;
-export const getMessage = /* GraphQL */ `
-  query GetMessage($id: ID!) {
-    getMessage(id: $id) {
-      id
-      senderID
-      receiverID
-      messageText
-      mediaURL
-      mediaType
-      createdAt
-      sender {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      receiver {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const listMessages = /* GraphQL */ `
-  query ListMessages(
-    $id: ID
-    $filter: ModelMessageFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listMessages(
-      id: $id
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        id
-        senderID
-        receiverID
-        messageText
-        mediaURL
-        mediaType
-        createdAt
-        updatedAt
-        owner
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const messagesBySenderID = /* GraphQL */ `
-  query MessagesBySenderID(
-    $senderID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelMessageFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    messagesBySenderID(
-      senderID: $senderID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        senderID
-        receiverID
-        messageText
-        mediaURL
-        mediaType
-        createdAt
-        updatedAt
-        owner
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const getGroup = /* GraphQL */ `
   query GetGroup($id: ID!) {
     getGroup(id: $id) {
@@ -781,8 +989,8 @@ export const getGroupMember = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -902,8 +1110,8 @@ export const getNotification = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt

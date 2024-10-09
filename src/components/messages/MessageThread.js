@@ -23,10 +23,11 @@ const MessageThread = ({ conversation }) => {
           </div>
         ))}
       </div>
-      <MessageInput />
+      <div className="message-input-wrapper">
+        <MessageInput />
+      </div>
     </div>
   );
 };
 
 export default MessageThread;
-

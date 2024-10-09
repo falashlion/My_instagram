@@ -12,8 +12,8 @@ export const onCreateUser = /* GraphQL */ `
       email
       bio
       avatar
-      firstname
-      surname
+      name
+      Phone
       isPrivate
       Gender
       createdAt
@@ -51,6 +51,10 @@ export const onCreateUser = /* GraphQL */ `
         __typename
       }
       socials
+      conversations {
+        nextToken
+        __typename
+      }
       owner
       __typename
     }
@@ -67,8 +71,8 @@ export const onUpdateUser = /* GraphQL */ `
       email
       bio
       avatar
-      firstname
-      surname
+      name
+      Phone
       isPrivate
       Gender
       createdAt
@@ -106,6 +110,10 @@ export const onUpdateUser = /* GraphQL */ `
         __typename
       }
       socials
+      conversations {
+        nextToken
+        __typename
+      }
       owner
       __typename
     }
@@ -122,8 +130,8 @@ export const onDeleteUser = /* GraphQL */ `
       email
       bio
       avatar
-      firstname
-      surname
+      name
+      Phone
       isPrivate
       Gender
       createdAt
@@ -161,6 +169,334 @@ export const onDeleteUser = /* GraphQL */ `
         __typename
       }
       socials
+      conversations {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreateConversation = /* GraphQL */ `
+  subscription OnCreateConversation(
+    $filter: ModelSubscriptionConversationFilterInput
+    $owner: String
+  ) {
+    onCreateConversation(filter: $filter, owner: $owner) {
+      id
+      title
+      createdAt
+      updatedAt
+      participants {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateConversation = /* GraphQL */ `
+  subscription OnUpdateConversation(
+    $filter: ModelSubscriptionConversationFilterInput
+    $owner: String
+  ) {
+    onUpdateConversation(filter: $filter, owner: $owner) {
+      id
+      title
+      createdAt
+      updatedAt
+      participants {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteConversation = /* GraphQL */ `
+  subscription OnDeleteConversation(
+    $filter: ModelSubscriptionConversationFilterInput
+    $owner: String
+  ) {
+    onDeleteConversation(filter: $filter, owner: $owner) {
+      id
+      title
+      createdAt
+      updatedAt
+      participants {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreateConversationParticipant = /* GraphQL */ `
+  subscription OnCreateConversationParticipant(
+    $filter: ModelSubscriptionConversationParticipantFilterInput
+    $owner: String
+  ) {
+    onCreateConversationParticipant(filter: $filter, owner: $owner) {
+      id
+      conversationID
+      userID
+      joinedAt
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      user {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateConversationParticipant = /* GraphQL */ `
+  subscription OnUpdateConversationParticipant(
+    $filter: ModelSubscriptionConversationParticipantFilterInput
+    $owner: String
+  ) {
+    onUpdateConversationParticipant(filter: $filter, owner: $owner) {
+      id
+      conversationID
+      userID
+      joinedAt
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      user {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteConversationParticipant = /* GraphQL */ `
+  subscription OnDeleteConversationParticipant(
+    $filter: ModelSubscriptionConversationParticipantFilterInput
+    $owner: String
+  ) {
+    onDeleteConversationParticipant(filter: $filter, owner: $owner) {
+      id
+      conversationID
+      userID
+      joinedAt
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      user {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreateMessage = /* GraphQL */ `
+  subscription OnCreateMessage(
+    $filter: ModelSubscriptionMessageFilterInput
+    $owner: String
+  ) {
+    onCreateMessage(filter: $filter, owner: $owner) {
+      id
+      senderID
+      conversationID
+      messageText
+      mediaURL
+      mediaType
+      createdAt
+      status
+      sender {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateMessage = /* GraphQL */ `
+  subscription OnUpdateMessage(
+    $filter: ModelSubscriptionMessageFilterInput
+    $owner: String
+  ) {
+    onUpdateMessage(filter: $filter, owner: $owner) {
+      id
+      senderID
+      conversationID
+      messageText
+      mediaURL
+      mediaType
+      createdAt
+      status
+      sender {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteMessage = /* GraphQL */ `
+  subscription OnDeleteMessage(
+    $filter: ModelSubscriptionMessageFilterInput
+    $owner: String
+  ) {
+    onDeleteMessage(filter: $filter, owner: $owner) {
+      id
+      senderID
+      conversationID
+      messageText
+      mediaURL
+      mediaType
+      createdAt
+      status
+      sender {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      updatedAt
       owner
       __typename
     }
@@ -187,8 +523,8 @@ export const onCreatePost = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -231,8 +567,8 @@ export const onUpdatePost = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -275,8 +611,8 @@ export const onDeletePost = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -331,8 +667,8 @@ export const onCreateComment = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -379,8 +715,8 @@ export const onUpdateComment = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -427,8 +763,8 @@ export const onDeleteComment = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -471,8 +807,8 @@ export const onCreateLike = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -516,8 +852,8 @@ export const onUpdateLike = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -561,8 +897,8 @@ export const onDeleteLike = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -593,8 +929,8 @@ export const onCreateFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -609,8 +945,8 @@ export const onCreateFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -641,8 +977,8 @@ export const onUpdateFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -657,8 +993,8 @@ export const onUpdateFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -689,8 +1025,8 @@ export const onDeleteFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -705,161 +1041,8 @@ export const onDeleteFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onCreateMessage = /* GraphQL */ `
-  subscription OnCreateMessage(
-    $filter: ModelSubscriptionMessageFilterInput
-    $owner: String
-  ) {
-    onCreateMessage(filter: $filter, owner: $owner) {
-      id
-      senderID
-      receiverID
-      messageText
-      mediaURL
-      mediaType
-      createdAt
-      sender {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      receiver {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onUpdateMessage = /* GraphQL */ `
-  subscription OnUpdateMessage(
-    $filter: ModelSubscriptionMessageFilterInput
-    $owner: String
-  ) {
-    onUpdateMessage(filter: $filter, owner: $owner) {
-      id
-      senderID
-      receiverID
-      messageText
-      mediaURL
-      mediaType
-      createdAt
-      sender {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      receiver {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onDeleteMessage = /* GraphQL */ `
-  subscription OnDeleteMessage(
-    $filter: ModelSubscriptionMessageFilterInput
-    $owner: String
-  ) {
-    onDeleteMessage(filter: $filter, owner: $owner) {
-      id
-      senderID
-      receiverID
-      messageText
-      mediaURL
-      mediaType
-      createdAt
-      sender {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      receiver {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -963,8 +1146,8 @@ export const onCreateGroupMember = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1006,8 +1189,8 @@ export const onUpdateGroupMember = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1049,8 +1232,8 @@ export const onDeleteGroupMember = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1083,8 +1266,8 @@ export const onCreateNotification = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1116,8 +1299,8 @@ export const onUpdateNotification = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1149,8 +1332,8 @@ export const onDeleteNotification = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt

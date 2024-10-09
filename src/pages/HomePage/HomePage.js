@@ -16,7 +16,7 @@ const HomePage = () => {
       <div className="content-container top-0">
         <div className="stories-posts-section ">
           {/* Stories Section */}
-          <div className="stories-section ">
+          {/* <div className="stories-section ">
             <div className="stories flex space-x-2  ">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className=" flex flex-col items-center space-y-1 ">
@@ -34,11 +34,11 @@ const HomePage = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Posts Section */}
           <div className="posts-feed">
-            <h2>Posts</h2>
+            {/* <h2>Posts</h2> */}
             {[...Array(3)].map((_, i) => (
               <div key={i} className="post">
                 <div className="post-header">

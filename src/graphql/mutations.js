@@ -12,8 +12,8 @@ export const createUser = /* GraphQL */ `
       email
       bio
       avatar
-      firstname
-      surname
+      name
+      Phone
       isPrivate
       Gender
       createdAt
@@ -51,6 +51,10 @@ export const createUser = /* GraphQL */ `
         __typename
       }
       socials
+      conversations {
+        nextToken
+        __typename
+      }
       owner
       __typename
     }
@@ -67,8 +71,8 @@ export const updateUser = /* GraphQL */ `
       email
       bio
       avatar
-      firstname
-      surname
+      name
+      Phone
       isPrivate
       Gender
       createdAt
@@ -106,6 +110,10 @@ export const updateUser = /* GraphQL */ `
         __typename
       }
       socials
+      conversations {
+        nextToken
+        __typename
+      }
       owner
       __typename
     }
@@ -122,8 +130,8 @@ export const deleteUser = /* GraphQL */ `
       email
       bio
       avatar
-      firstname
-      surname
+      name
+      Phone
       isPrivate
       Gender
       createdAt
@@ -161,6 +169,334 @@ export const deleteUser = /* GraphQL */ `
         __typename
       }
       socials
+      conversations {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const createConversation = /* GraphQL */ `
+  mutation CreateConversation(
+    $input: CreateConversationInput!
+    $condition: ModelConversationConditionInput
+  ) {
+    createConversation(input: $input, condition: $condition) {
+      id
+      title
+      createdAt
+      updatedAt
+      participants {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const updateConversation = /* GraphQL */ `
+  mutation UpdateConversation(
+    $input: UpdateConversationInput!
+    $condition: ModelConversationConditionInput
+  ) {
+    updateConversation(input: $input, condition: $condition) {
+      id
+      title
+      createdAt
+      updatedAt
+      participants {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteConversation = /* GraphQL */ `
+  mutation DeleteConversation(
+    $input: DeleteConversationInput!
+    $condition: ModelConversationConditionInput
+  ) {
+    deleteConversation(input: $input, condition: $condition) {
+      id
+      title
+      createdAt
+      updatedAt
+      participants {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      owner
+      __typename
+    }
+  }
+`;
+export const createConversationParticipant = /* GraphQL */ `
+  mutation CreateConversationParticipant(
+    $input: CreateConversationParticipantInput!
+    $condition: ModelConversationParticipantConditionInput
+  ) {
+    createConversationParticipant(input: $input, condition: $condition) {
+      id
+      conversationID
+      userID
+      joinedAt
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      user {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateConversationParticipant = /* GraphQL */ `
+  mutation UpdateConversationParticipant(
+    $input: UpdateConversationParticipantInput!
+    $condition: ModelConversationParticipantConditionInput
+  ) {
+    updateConversationParticipant(input: $input, condition: $condition) {
+      id
+      conversationID
+      userID
+      joinedAt
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      user {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteConversationParticipant = /* GraphQL */ `
+  mutation DeleteConversationParticipant(
+    $input: DeleteConversationParticipantInput!
+    $condition: ModelConversationParticipantConditionInput
+  ) {
+    deleteConversationParticipant(input: $input, condition: $condition) {
+      id
+      conversationID
+      userID
+      joinedAt
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      user {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const createMessage = /* GraphQL */ `
+  mutation CreateMessage(
+    $input: CreateMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    createMessage(input: $input, condition: $condition) {
+      id
+      senderID
+      conversationID
+      messageText
+      mediaURL
+      mediaType
+      createdAt
+      status
+      sender {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateMessage = /* GraphQL */ `
+  mutation UpdateMessage(
+    $input: UpdateMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    updateMessage(input: $input, condition: $condition) {
+      id
+      senderID
+      conversationID
+      messageText
+      mediaURL
+      mediaType
+      createdAt
+      status
+      sender {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteMessage = /* GraphQL */ `
+  mutation DeleteMessage(
+    $input: DeleteMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    deleteMessage(input: $input, condition: $condition) {
+      id
+      senderID
+      conversationID
+      messageText
+      mediaURL
+      mediaType
+      createdAt
+      status
+      sender {
+        id
+        username
+        email
+        bio
+        avatar
+        name
+        Phone
+        isPrivate
+        Gender
+        createdAt
+        updatedAt
+        socials
+        owner
+        __typename
+      }
+      conversation {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      updatedAt
       owner
       __typename
     }
@@ -187,8 +523,8 @@ export const createPost = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -231,8 +567,8 @@ export const updatePost = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -275,8 +611,8 @@ export const deletePost = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -331,8 +667,8 @@ export const createComment = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -379,8 +715,8 @@ export const updateComment = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -427,8 +763,8 @@ export const deleteComment = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -471,8 +807,8 @@ export const createLike = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -516,8 +852,8 @@ export const updateLike = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -561,8 +897,8 @@ export const deleteLike = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -593,8 +929,8 @@ export const createFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -609,8 +945,8 @@ export const createFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -641,8 +977,8 @@ export const updateFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -657,8 +993,8 @@ export const updateFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -689,8 +1025,8 @@ export const deleteFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -705,161 +1041,8 @@ export const deleteFollower = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const createMessage = /* GraphQL */ `
-  mutation CreateMessage(
-    $input: CreateMessageInput!
-    $condition: ModelMessageConditionInput
-  ) {
-    createMessage(input: $input, condition: $condition) {
-      id
-      senderID
-      receiverID
-      messageText
-      mediaURL
-      mediaType
-      createdAt
-      sender {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      receiver {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const updateMessage = /* GraphQL */ `
-  mutation UpdateMessage(
-    $input: UpdateMessageInput!
-    $condition: ModelMessageConditionInput
-  ) {
-    updateMessage(input: $input, condition: $condition) {
-      id
-      senderID
-      receiverID
-      messageText
-      mediaURL
-      mediaType
-      createdAt
-      sender {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      receiver {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const deleteMessage = /* GraphQL */ `
-  mutation DeleteMessage(
-    $input: DeleteMessageInput!
-    $condition: ModelMessageConditionInput
-  ) {
-    deleteMessage(input: $input, condition: $condition) {
-      id
-      senderID
-      receiverID
-      messageText
-      mediaURL
-      mediaType
-      createdAt
-      sender {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
-        isPrivate
-        Gender
-        createdAt
-        updatedAt
-        socials
-        owner
-        __typename
-      }
-      receiver {
-        id
-        username
-        email
-        bio
-        avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -963,8 +1146,8 @@ export const createGroupMember = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1006,8 +1189,8 @@ export const updateGroupMember = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1049,8 +1232,8 @@ export const deleteGroupMember = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1083,8 +1266,8 @@ export const createNotification = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1116,8 +1299,8 @@ export const updateNotification = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
@@ -1149,8 +1332,8 @@ export const deleteNotification = /* GraphQL */ `
         email
         bio
         avatar
-        firstname
-        surname
+        name
+        Phone
         isPrivate
         Gender
         createdAt
