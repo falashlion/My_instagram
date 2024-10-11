@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { generateClient } from 'aws-amplify/api';
-import * as mutations from '../graphql/mutations';
+import * as mutations from '../../graphql/mutations';
 
 const client = generateClient();
 

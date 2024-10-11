@@ -1,4 +1,3 @@
-// src/context/UserContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { fetchUserAttributes } from 'aws-amplify/auth';
 import { generateClient } from 'aws-amplify/api';
@@ -17,7 +16,7 @@ const UserProvider = ({ children }) => {
       try {
         const currentUser = await fetchUserAttributes();
         console.log(currentUser);
-        const username = currentUser.username;
+        const username = currentUser.preferred_username;
         const variables = {
             limit: 1,
             filter: { username: { eq: username } }

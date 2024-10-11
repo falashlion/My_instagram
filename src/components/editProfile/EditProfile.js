@@ -3,16 +3,59 @@ import "./EditProfile.css";
 import useUpdateUser from "../../hooks/user/useUpdateUser"; 
 import { useUser } from "../../context/userContext";
 import Spinner from "../Spinner/Spinner"; 
+import useUpdateUserAvatar from "../../hooks/user/useUpdateUserAvatar";
 
 const EditProfile = () => {
   const updateUser = useUpdateUser();
   const { user } = useUser(); 
-  const [bio, setBio] = useState(user?.bio || "Web developer #amazing baller 🏀");
+  const [bio, setBio] = useState(user?.bio );
   const [Gender, setGender] = useState(user?.Gender || "Prefer not to say");
   const [suggestions, setSuggestions] = useState(false);
   const [loading, setLoading] = useState(!user); 
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const { uploadImage, updateUserAvatar, success } = useUpdateUserAvatar();
 
-  // Ensure user ID is available
+  const handlePictureClick = () => {
+    setShowPopup(true);
+  };
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleSubmitImage = async() => {
+    
+    if (!selectedFile) {
+      alert('Please select a file to upload.');
+      return;
+    }
+
+    try {
+      const uploadedImageUrl = await uploadImage(selectedFile);
+      if (!uploadedImageUrl) {
+        throw new Error("Image upload failed. No URL returned.");
+      }
+  
+      const updatedUser = await updateUserAvatar(userId);
+      if (!updatedUser) {
+        throw new Error("User update failed.");
+      }
+  
+      console.log("Avatar updated successfully!");
+      setShowPopup(false);
+      return true;
+    } catch (error) {
+      // console.error("Error during image upload or user update", error);
+      
+      setShowPopup(false); 
+      alert('An error occurred while updating your avatar. Please try again.');
+    }
+  };
+
+  const handleClose = () => {
+    setShowPopup(false);
+  };
   const userId = user?.id; 
 
   const handleSubmit = async (e) => {
@@ -27,6 +70,7 @@ const EditProfile = () => {
       setLoading(true); 
       const response = await updateUser(userData);
       console.log("User updated successfully:", response);
+      setLoading(false);
     } catch (error) {
       console.error("Update failed:", error);
     } finally {
@@ -34,25 +78,52 @@ const EditProfile = () => {
     }
   };
 
-  // Render a loading spinner if user data is not available yet
   if (loading) {
     return <Spinner />;
   }
 
   return (
     <div className="edit-profile-container">
-      <h2>Edit profile</h2>
       <div className="profile-header">
         <img
           className="profile-photo"
           src={user.avatar || "https://via.placeholder.com/80"}
           alt="Profile"
+          onClick={handlePictureClick}
         />
         <div className="profile-info">
           <h3>{user.username}</h3>
           <p>{user.name}</p>
         </div>
-        <button className="change-photo-btn">Change photo</button>
+        <button className="change-photo-btn"onClick={handlePictureClick}>Change photo</button>
+        {/* Popup Overlay */}
+        {showPopup && (
+              <div className="popup-overlay fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+                <div className="popup-content bg-white p-6 rounded-lg shadow-lg relative">
+                  <h3 className="text-xl font-bold mb-4">Upload New Profile Picture</h3>
+                  <input 
+                    type="file" 
+                    onChange={handleFileChange}
+                    accept="image/*"
+                    className="mb-4"
+                  />
+                  <div className="flex justify-end">
+                    <button
+                      onClick={handleSubmitImage}
+                      className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
+                    >
+                      Submit
+                    </button>
+                    <button 
+                      onClick={handleClose}
+                      className="ml-4 text-gray-500 hover:text-gray-700"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
       </div>
       <form className="profile-form" onSubmit={handleSubmit}>
         <label htmlFor="website">Website</label>

@@ -13,8 +13,6 @@ const NewConversation = ({ onCreate }) => {
     <div className="overlay">
       <div className="new-conversation-popup">
         <div className="popup-header">
-          {/* <h2>New message</h2> */}
-          {/* <button className="close-button" onClick={onCreate}>×</button> */}
         </div>
         <input
           type="text"

@@ -121,6 +121,7 @@ body {
   margin-left: 3rem;
   border: none;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .user-profile {
@@ -131,7 +132,8 @@ body {
 }
 
 .profile-img {
-  border-radius: 50%;
+  border-radius: 100%;
+  max-width: 50px;
 }
 
 .suggestions .suggestion {

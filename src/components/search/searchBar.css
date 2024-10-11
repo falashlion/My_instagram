@@ -141,7 +141,7 @@
   .profile-pic {
     width: 2rem;
     height: 2rem;
-    border-radius: 9999px;
+    border-radius: 9987px;
   }
   
   .customer-info {
@@ -150,19 +150,25 @@
   }
   
   .customer-name {
-    font-size: 0.875rem;
+    padding-left: 30px;
+    font-size: 0.975rem;
     font-weight: 500;
     color: #1f2937;
   }
   
   .customer-email {
+    padding: 2%;
+    padding-left: 30px;
     font-size: 0.875rem;
     color: #6b7280;
   }
   
-  .customer-amount {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1f2937;
+ .customer-email:hover {
+    text-decoration: underline;
   }
+
+  .customer-email:hover {
+    color: #2563eb;
+  }
+
   

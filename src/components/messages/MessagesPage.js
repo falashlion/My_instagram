@@ -3,13 +3,13 @@ import ConversationsList from './ConversationsList';
 import NewConversation from './NewConversation';
 import MessageThread from './MessageThread';
 import './MessagesPage.css';
+import useGetConversations from '../../hooks/conversation/useGetConversations';
 
-const mockConversations = [
-  { id: 1, name: 'John Doe', lastMessage: 'Hey, how are you?' },
-  { id: 2, name: 'Jane Smith', lastMessage: 'Can you send the document?' },
-];
+
+
 
 const MessagesPage = () => {
+  const { conversations, loading, error } = useGetConversations();
   const [currentConversation, setCurrentConversation] = useState(null);
   const [newConversation, setNewConversation] = useState(false);
 
@@ -17,7 +17,7 @@ const MessagesPage = () => {
     <div className="messages-page">
       <div className="messages-container">
         <ConversationsList
-          conversations={mockConversations}
+          conversations={conversations}
           onSelect={(conv) => setCurrentConversation(conv)}
         />
         {newConversation ? (

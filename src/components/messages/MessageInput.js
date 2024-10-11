@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import './MessageInput.css';
+import useCreateMessage from '../../hooks/message/useCreateMessage';
+import { useUser } from '../../context/userContext';
 
-const MessageInput = () => {
+const MessageInput = (conversationId) => {
   const [message, setMessage] = useState('');
+  const { user } = useUser();
+  const conversationID = conversationId;
+  const { createMessage } = useCreateMessage({ conversationID:conversationID, messageData: { messageText: message, senderID: user?.id } });
 
-  const sendMessage = (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
-    // Handle sending message logic
-    setMessage('');
+    try {
+      await createMessage(); // Ensure the message is created successfully
+      setMessage(''); // Clear the input after sending
+    } catch (error) {
+      console.error("Failed to send message", error);
+    }
   };
 
   return (

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import './PostDetails.css';
+import useListUsers from '../../hooks/user/useListUsers';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const PostDetails = ({ file, onNext }) => {
   const [caption, setCaption] = useState('');
+  const [location, setLocation] = useState('');
+  const navigate = useNavigate();
   const [showLocationInput, setShowLocationInput] = useState(false);
   const [showTagsDropdown, setShowTagsDropdown] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
+  const { users, loading, error, loadMore, hasMore } = useListUsers({ limit: 10 });
 
-  const mockTags = ['Nature', 'City', 'Adventure', 'Beach', 'Mountains'];
 
   const toggleLocationInput = () => {
     setShowLocationInput(!showLocationInput);
@@ -27,10 +31,27 @@ const PostDetails = ({ file, onNext }) => {
 
 
   const handleNext = () => {
-    onNext(caption);
+    onNext(caption,location,selectedTags);
   };
+ const fallbackImageUrl = "https://placehold.co/400";
+ 
+  const isValidImage = file ;
+  let previewUrl = null;
 
-  const previewUrl = file ? URL.createObjectURL(file) : null;
+if (isValidImage) {
+  try {
+    previewUrl = URL.createObjectURL(file);
+  } catch (error) {
+    console.error("Error generating preview URL:", error);
+    previewUrl = fallbackImageUrl;
+    alert("Error generating preview URL. Please try again.");
+    navigate('/');
+  }
+} else {
+  console.warn("Invalid file type for preview.");
+  previewUrl = fallbackImageUrl;  
+}
+
 
   return (
     <div className="post-details-wrapper">
@@ -62,7 +83,13 @@ const PostDetails = ({ file, onNext }) => {
               Add location
             </button>
             {showLocationInput && (
-              <input type="text" placeholder="Enter location" className="location-input" />
+              <input
+              type="text"
+              placeholder="Enter location"
+              className="location-input"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)} 
+            />
             )}
 
             <button className="add-tags" onClick={toggleTagsDropdown}>
@@ -70,9 +97,9 @@ const PostDetails = ({ file, onNext }) => {
             </button>
             {showTagsDropdown && (
               <div className="tags-dropdown">
-                {mockTags.map((tag, index) => (
-                  <div key={index} className="tag-item" onClick={() => handleTagSelect(tag)}>
-                    {tag} {selectedTags.includes(tag) ? '✔' : ''}
+                {users?.map((tag, index) => (
+                  <div key={index} className="tag-item" onClick={() => handleTagSelect(tag?.username)}>
+                    {tag.username} {selectedTags.includes(tag.username) ? '✔' : ''}
                   </div>
                 ))}
               </div>

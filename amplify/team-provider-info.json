@@ -20,6 +20,9 @@
       },
       "storage": {
         "instagramapp": {}
+      },
+      "hosting": {
+        "S3AndCloudFront": {}
       }
     }
   }

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { generateClient } from 'aws-amplify/api';
-import * as queries from '../graphql/queries'; 
+import * as queries from '../../graphql/queries'; 
 
 const client = generateClient();
 

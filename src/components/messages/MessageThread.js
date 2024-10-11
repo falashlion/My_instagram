@@ -24,7 +24,7 @@ const MessageThread = ({ conversation }) => {
         ))}
       </div>
       <div className="message-input-wrapper">
-        <MessageInput />
+        <MessageInput conversationId={conversation?.id} />
       </div>
     </div>
   );

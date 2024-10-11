@@ -1,13 +1,17 @@
 .post-preview-container {
     flex: content;
+    /* flex-direction: row; */
     text-align: center;
-    padding-left: 25%;
+    margin:10% 15% 25%;
+    padding-left: 15%;
     padding-top: 10%;
     justify-content: center;
+    box-shadow: rgba(0,0,0,0.85) 0px 3px 8px;
+    border-radius: 5px;
   }
   
   .preview {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .final-image {
@@ -21,8 +25,11 @@
   .share-btn {
     background-color: #0095f6;
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    margin-left: 45px;
+    margin-bottom: 10px;
+    /* padding: 10px 20px; */
+    padding-bottom: 10px;
+    border-radius: 15px;
     border: none;
     cursor: pointer;
   }

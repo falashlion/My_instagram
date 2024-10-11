@@ -17,6 +17,7 @@ import { Amplify } from 'aws-amplify';
 import outputs from './amplifyconfiguration.json';
 import '@aws-amplify/ui-react/styles.css';
 import UserProvider from './context/userContext';
+import CommentModal from './components/comment/CommentModal';
 
 Amplify.configure(outputs);
 
@@ -310,6 +311,7 @@ export default function App() {
                   <Route path="/explore" element={<ExplorePost />} />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/settings" element={<EditProfile />} />
+                  <Route path="/comments" element={<CommentModal />} />
                 </Route>
               </Routes>
             </div>

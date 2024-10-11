@@ -1,50 +1,62 @@
 .message-input-container {
+  display: flex;
+  justify-content: left;
+  align-items: left;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
+  padding: 10px;
 }
 
 .message-input-form {
-  display: flex;
-  align-items: center;
   width: 100%;
-  max-width: 900px;
+  max-width: 50%; /* Limit the width of the form */
 }
 
 .message-input-box {
   display: flex;
   align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 25px;
+  padding: 5px 10px;
   width: 100%;
-  padding: 10px;
-  background-color: #c7c7c7c7;
-  border-radius: 40px;
-  
+  max-width: 150%; /* Ensure the input doesn't exceed 150px */
 }
 
 .message-textarea {
-  flex-grow: 1;
-  margin: 0 10px;
-  padding: 10px;
-  color: #000000;
-  background-color: #fffefe;
-  border: none;
-  border-radius: 40px;
   resize: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  font-size: 14px;
+  padding: 5px;
+  height: 25px;
 }
 
 .input-button {
-  color: #050000;
-  background-color: transparent;
+  background: none;
   border: none;
-  padding: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.input-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.input-button svg {
+  width: 20px;
+  height: 20px;
 }
 
-.send-svg svg {
+.send-svg {
   fill: #558bff;
+}
+
+/* Add media queries to adjust styles for different screen sizes */
+@media (max-width: 600px) {
+  .message-input-form {
+    max-width: 100%;
+  }
+
+  .message-input-box {
+    max-width: 100%;
+  }
 }

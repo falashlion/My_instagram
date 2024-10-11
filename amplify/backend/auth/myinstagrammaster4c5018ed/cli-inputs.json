@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "myinstagrammaster4c5018ed_identitypool_4c5018ed",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "myinst4c5018ed",
     "userPoolName": "myinstagrammaster4c5018ed_userpool_4c5018ed",
     "autoVerifiedAttributes": [

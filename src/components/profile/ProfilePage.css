@@ -1,119 +1,132 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fafafa;
-  }
-  
-  .profile-page {
-    width: 100%;
-  }
-  
-  .profile-header {
-    display: flex;
-    padding: 20px;
-    border-bottom: 1px solid #dbdbdb;
-  }
-  
-  .profile-picture img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-right: 30px;
-  }
-  
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .profile-username {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-username h2 {
-    font-size: 28px;
-    margin-right: 15px;
-  }
-  
-  .profile-btn {
-    background-color: white;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    padding: 5px 10px;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .profile-btn:hover {
-    background-color: #efefef;
-  }
-  
-  .profile-settings {
-    width: 25px;
-    height: 25px;
-    background-size: cover;
-    cursor: pointer;
-  }
-  
-  .profile-stats {
-    display: flex;
-    justify-content: space-between;
-    margin: 15px 0;
-  }
-  
-  .profile-stats p {
-    margin-right: 20px;
-  }
-  
-  .profile-bio {
-    font-size: 16px;
-  }
-  
-  .profile-bio strong {
-    font-weight: bold;
-  }
-  
-  .profile-bio span {
-    color: #00376b;
-  }
-  
-  .profile-nav {
-    display: flex;
-    justify-content: space-evenly;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
-    background-color: white;
-    padding: 10px 0;
-  }
-  
-  .profile-nav button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 10px 0;
-    transition: border-bottom 0.3s;
-  }
-  
-  .profile-nav button:hover {
-    border-bottom: 2px solid black;
-  }
-  
-  .profile-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  
-  .profile-posts-grid img {
-    width: 100%;
-    height: auto;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  justify-content: center;
+}
+
+.profile-page {
+  width: 100%;
+}
+
+.profile-header {
+  display: flex;
+  padding: 20px;
+  border-bottom: 1px  #dbdbdb;
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-username {
+  display: flex;
+  align-items: center;
+}
+
+.profile-username h2 {
+  font-size: 28px;
+  margin-right: 15px;
+}
+
+.profile-btn {
+  background-color: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-btn:hover {
+  background-color: #efefef;
+}
+
+.profile-settings {
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: left;
+  margin: 15px 0;
+}
+
+.profile-stats p {
+  margin-right: 20px;
+}
+
+.profile-bio {
+  font-size: 16px;
+}
+
+.profile-bio strong {
+  font-weight: bold;
+}
+
+.profile-bio span {
+  color: #00376b;
+}
+
+.profile-nav {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid #dbdbdb;
+  background-color: white;
+  padding: 10px 0;
+}
+
+.profile-nav-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 0;
+  transition: border-bottom 0.3s;
+}
+
+.profile-nav-button:hover {
+  border-top: 1px solid black;
+}
+
+.profile-nav-button.active {
+  border-top: 1px solid black;
+  font-weight:bold;
+}
+
+.profile-posts-grid {
+  display: grid;
+  /* grid-template-columns: repeat(3, 1fr); */
+  gap: 2px;
+  margin-top: 20px;
+  max-height: 400px;
+  /* overflow-y: auto; */
+  justify-content: center;
+  /* max-width: 1000px; */
+}
+
+.profile-posts-grid img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  padding: 5px;
+}
+
+.placeholder-content {
+  text-align: center;
+  margin-top: 20px;
+}

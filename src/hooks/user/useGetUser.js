@@ -4,14 +4,14 @@ import * as queries from '../../graphql/queries';
 
 const client = generateClient();
 
-const useGetUser = () => {
-  const getUser = useCallback(async (id) => {
+const useGetUser = ({UserId}) => {
+  const getUser = useCallback(async () => {
     try {
       const user = await client.graphql({
         query: queries.getUser, 
-        variables: { id },
+        variables: { id: UserId },
       });
-      return user;
+      return user.data.user;
     } catch (error) {
       console.error("Error fetching user:", error);
       throw new Error("Could not fetch user.");

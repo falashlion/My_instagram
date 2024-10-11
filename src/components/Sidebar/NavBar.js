@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import logo from '../../assets/images/instagram-logo.png'
 import { Link } from 'react-router-dom'
+import { useUser } from '../../context/userContext';
 
 const NavBar = ({signOut}) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMessageNumber, setIsMessageNumber] = useState(0);
+  const user = useUser();
   
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -185,7 +187,7 @@ const NavBar = ({signOut}) => {
                 className="space-y-0 space-x-4 flex items-center justify-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <img
-                  src={`https://via.placeholder.com/40?text=Sugg+${1  + 1}`}
+                  src={user?.avatar || `https://via.placeholder.com/40?text=Sugg+${1  + 1}`}
                   alt="Suggestion"
                   className="w-10 h-10 rounded-full object-full border-2 border-white"
                 />
